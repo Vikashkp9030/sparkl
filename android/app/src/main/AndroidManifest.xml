@@ -2,7 +2,7 @@
     <uses-feature android:name="android.permission.CAMERA"/>
 
     <application
-        android:label="sparkl"
+        android:label="Sparkl"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
