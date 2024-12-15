@@ -41,6 +41,8 @@ dependencies:
   another_dashed_container: ^1.0.0
   camera: ^0.11.0+2
   permission_handler: ^11.3.1
+  responsive_framework: ^1.5.1
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:

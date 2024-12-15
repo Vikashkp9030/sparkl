@@ -1,6 +1,7 @@
 import 'package:another_dashed_container/another_dashed_container.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:video_player/video_player.dart';
@@ -89,671 +90,430 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
       backgroundColor: const Color(0xFFFFFDEF),
       body: Stack(
         children: [
-          SafeArea(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  height: index == 0 ? 80 : 50,
-                  child: Stack(
-                    children: [
-                      AnimatedPositioned(
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOut,
-                        left: index == 0
-                            ? MediaQuery.of(context).size.width / 2 - 120
-                            : 0,
-                        child: AnimatedContainer(
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8),
-                          alignment: index == 0
-                              ? Alignment.center
-                              : Alignment.centerLeft,
-                          duration: const Duration(milliseconds: 500),
-                          width: index == 0 ? 200 : 140,
-                          height: index == 0 ? 80 : 50,
-                          child: Image.asset(
-                            'assets/sparkl_logo.png',
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: index == 0 ? 140 : 100,
-                  child: Stack(
-                    children: [
-                      // First Text
-                      AnimatedPositioned(
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.easeInOut,
-                        left: index == 0
-                            ? MediaQuery.of(context).size.width / 2 -
-                                120 // Center
-                            : index == 1 || index == 2
-                                ? -200 // Move Left
-                                : MediaQuery.of(context)
-                                    .size
-                                    .width, // Start Right
-                        top: 20.0,
-                        child: AnimatedOpacity(
-                          duration: const Duration(milliseconds: 200),
-                          opacity: index == 0 ? 1 : 0,
-                          child: const Column(
-                            children: [
-                              Text(
-                                'Learning Made\n Personal',
-                                style: TextStyle(
-                                  fontSize: 36,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              Text(
-                                'A Program designed just for YOU!',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                      // Second Text
-                      AnimatedPositioned(
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.easeInOut,
-                        left: index == 1
-                            ? 16 // Center
-                            : index == 2
-                                ? -200 // Move Left
-                                : MediaQuery.of(context)
-                                    .size
-                                    .width, // Start Right
-                        top: 20.0,
-                        child: AnimatedOpacity(
-                          duration: const Duration(milliseconds: 200),
-                          opacity: index == 1 ? 1 : 0,
-                          child: const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '1-on-1 Live Classes',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              Text(
-                                ' Learning customized for every student',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                      // Third Text
-
-                      AnimatedPositioned(
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.easeInOut,
-                        left: index == 2
-                            ? 16 // Center
-                            : MediaQuery.of(context).size.width +
-                                200, // Move Left
-                        top: 20.0,
-                        child: AnimatedOpacity(
-                          duration: const Duration(milliseconds: 200),
-                          opacity: index == 2 ? 1 : 0,
-                          child: const Text(
-                            'Doubt Resolution\nWith Teachers',
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // if (index == 1)
-                //   const SizedBox(
-                //     height: 100,
-                //   ),
-                // Stack(
-                //   alignment: Alignment.center,
-                //   children: [
-                //     Lottie.asset(
-                //       'assets/sparkl_shape_shift_lottie.json', // Path to your Lottie JSON
-                //       width: double.infinity,
-                //       height: 320,
-                //       fit: BoxFit.fitWidth, // Optional: Adjust the fit
-                //     ),
-                //     Positioned(
-                //       top: 36,
-                //       child: Align(
-                //         alignment: Alignment.center,
-                //         child: Stack(
-                //           children: [
-                //             Padding(
-                //               padding: const EdgeInsets.all(32.0),
-                //               child: Container(
-                //                 width: 260,
-                //                 height: 260,
-                //                 padding: const EdgeInsets.all(16),
-                //                 decoration: BoxDecoration(
-                //                   shape: BoxShape
-                //                       .circle, // Ensures the shape is circular
-                //                   color: Colors
-                //                       .transparent, // Background color of the circle
-                //                   border: Border.all(
-                //                     color:
-                //                         const Color(0xFFFBC02D), // Border color
-                //                     width: 1, // Border width
-                //                   ),
-                //                 ),
-                //                 child: ClipOval(
-                //                   child: _isPermissionGranted &&
-                //                           _isCameraInitialized
-                //                       ? CameraPreview(_cameraController)
-                //                       : _videoController.value.isInitialized
-                //                           ? AspectRatio(
-                //                               aspectRatio: _videoController
-                //                                   .value.aspectRatio,
-                //                               child:
-                //                                   VideoPlayer(_videoController),
-                //                             )
-                //                           : const Center(
-                //                               child:
-                //                                   CircularProgressIndicator()),
-                //                 ),
-                //               ),
-                //             ),
-                //             Positioned(
-                //               top: 36,
-                //               left: 40,
-                //               child: DashedContainer(
-                //                 dashColor: const Color(0xFFFBC02D),
-                //                 borderRadius: 50.0, // Make it circular
-                //                 dashedLength: 4,
-                //                 blankLength: 4,
-                //                 strokeWidth: 3.0,
-                //                 child: Container(
-                //                   width: 60, // Fixed width and height
-                //                   height: 60,
-                //                   decoration: const BoxDecoration(
-                //                     color: Colors.white,
-                //                     shape: BoxShape.circle, // Make it circular
-                //                   ),
-                //                   child: Padding(
-                //                     padding: const EdgeInsets.all(12.0),
-                //                     child: ClipOval(
-                //                       child: Image.asset(
-                //                         'assets/blue_book.png',
-                //                         fit: BoxFit
-                //                             .cover, // Ensure the image fits well
-                //                       ),
-                //                     ),
-                //                   ),
-                //                 ),
-                //               ),
-                //             ),
-                //             Positioned(
-                //               top: 160,
-                //               left: 8,
-                //               child: DashedContainer(
-                //                 dashColor: const Color(0xFFFBC02D),
-                //                 borderRadius: 50.0, // Make it circular
-                //                 dashedLength: 4,
-                //                 blankLength: 4,
-                //                 strokeWidth: 3.0,
-                //                 child: Container(
-                //                   width: 45, // Fixed width and height
-                //                   height: 45,
-                //                   decoration: const BoxDecoration(
-                //                     color: Colors.white,
-                //                     shape: BoxShape.circle, // Make it circular
-                //                   ),
-                //                   child: Padding(
-                //                     padding: const EdgeInsets.all(12.0),
-                //                     child: ClipOval(
-                //                       child: Image.asset(
-                //                         'assets/pre_read_selected.png',
-                //                         fit: BoxFit
-                //                             .cover, // Ensure the image fits well
-                //                       ),
-                //                     ),
-                //                   ),
-                //                 ),
-                //               ),
-                //             ),
-                //             Positioned(
-                //               top: 50,
-                //               right: 0,
-                //               child: DashedContainer(
-                //                 dashColor: const Color(0xFFFBC02D),
-                //                 borderRadius: 40.0,
-                //                 dashedLength: 4,
-                //                 blankLength: 4,
-                //                 strokeWidth: 3.0,
-                //                 child: Container(
-                //                   padding: const EdgeInsets.symmetric(
-                //                       horizontal: 4, vertical: 8),
-                //                   decoration: BoxDecoration(
-                //                       color: Colors.white,
-                //                       borderRadius:
-                //                           BorderRadius.circular(40.0)),
-                //                   child: const Text(
-                //                     'Holistic well-Being',
-                //                     style: TextStyle(
-                //                         fontSize: 16,
-                //                         fontStyle: FontStyle.italic),
-                //                   ),
-                //                 ),
-                //               ),
-                //             ),
-                //             AnimatedPositioned(
-                //               duration: const Duration(milliseconds: 500),
-                //               curve: Curves.easeInOut,
-                //               bottom: index == 0 ? 0 : -200,
-                //               left: index == 0 ? 0 : -200,
-                //               child: DashedContainer(
-                //                 dashColor: const Color(0xFFFBC02D),
-                //                 borderRadius: 40.0,
-                //                 dashedLength: 4,
-                //                 blankLength: 4,
-                //                 strokeWidth: 3.0,
-                //                 child: Container(
-                //                   padding: const EdgeInsets.symmetric(
-                //                       horizontal: 4, vertical: 8),
-                //                   decoration: BoxDecoration(
-                //                       color: Colors.white,
-                //                       borderRadius:
-                //                           BorderRadius.circular(40.0)),
-                //                   child: const Text(
-                //                     'Doubt Clarification',
-                //                     style: TextStyle(
-                //                         fontSize: 16,
-                //                         fontStyle: FontStyle.italic),
-                //                   ),
-                //                 ),
-                //               ),
-                //             ),
-                //             Positioned(
-                //               bottom: 50,
-                //               left: 0,
-                //               child: DashedContainer(
-                //                 dashColor: const Color(0xFFFBC02D),
-                //                 borderRadius: 40.0,
-                //                 dashedLength: 4,
-                //                 blankLength: 4,
-                //                 strokeWidth: 3.0,
-                //                 child: Container(
-                //                   padding: const EdgeInsets.symmetric(
-                //                       horizontal: 4, vertical: 8),
-                //                   decoration: BoxDecoration(
-                //                       color: Colors.white,
-                //                       borderRadius:
-                //                           BorderRadius.circular(40.0)),
-                //                   child: const Text(
-                //                     'Doubt Clarification',
-                //                     style: TextStyle(
-                //                         fontSize: 16,
-                //                         fontStyle: FontStyle.italic),
-                //                   ),
-                //                 ),
-                //               ),
-                //             ),
-                //             Positioned(
-                //               bottom: 80,
-                //               right: 0,
-                //               child: DashedContainer(
-                //                 dashColor: const Color(0xFFFBC02D),
-                //                 borderRadius: 40.0,
-                //                 dashedLength: 4,
-                //                 blankLength: 4,
-                //                 strokeWidth: 3.0,
-                //                 child: Container(
-                //                   padding: const EdgeInsets.symmetric(
-                //                       horizontal: 8, vertical: 8),
-                //                   decoration: BoxDecoration(
-                //                       color: Colors.white,
-                //                       borderRadius:
-                //                           BorderRadius.circular(40.0)),
-                //                   child: const Text(
-                //                     '𝒫𝑒𝓇𝓈𝑜𝓃𝒶𝓁𝒾𝓈𝑒𝒹',
-                //                     style: TextStyle(
-                //                         fontSize: 16,
-                //                         fontStyle: FontStyle.italic),
-                //                   ),
-                //                 ),
-                //               ),
-                //             ),
-                //           ],
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    if (index == 0)
-                      Lottie.asset(
-                        'assets/sparkl_shape_shift_lottie.json',
-                        width: double.infinity,
-                        height: 400,
-                        fit: BoxFit.fitWidth,
-                      ),
-                    if (index != 0)
-                      const SizedBox(
-                        height: 500,
-                        width: double.infinity,
-                      ),
-                    AnimatedPositioned(
-                        duration: const Duration(milliseconds: 500),
-                        right: index == 1 ? 0 : -1000,
-                        top: 80,
-                        height: 500,
-                        child: Stack(
-                          children: [
-                            Image.asset(
-                              'assets/stack_card.png',
-                              height: 180,
-                              width: MediaQuery.of(context).size.width,
-                            ),
-                            Positioned(
-                                top: 10,
-                                child: Image.asset(
-                                  'assets/stack_card.png',
-                                  height: 220,
-                                  width: MediaQuery.of(context).size.width,
-                                )),
-                            Positioned(
-                                top: 20,
-                                child: Image.asset(
-                                  'assets/stack_card.png',
-                                  height: 260,
-                                  width: MediaQuery.of(context).size.width,
-                                )),
-                            Positioned(
-                                top: 30,
-                                child: Image.asset(
-                                  'assets/stack_card.png',
-                                  height: 300,
-                                  width: MediaQuery.of(context).size.width,
-                                ))
-                          ],
-                        )),
-                    AnimatedPositioned(
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: index == 0 ? 200 : 160,
+              ),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  if (index == 0)
+                    Lottie.asset(
+                      'assets/sparkl_shape_shift_lottie.json',
+                      width: 400,
+                      height: 400,
+                      fit: BoxFit.fitWidth,
+                    ),
+                  if (index != 0)
+                    const SizedBox(
+                      height: 500,
+                      width: double.infinity,
+                    ),
+                  AnimatedPositioned(
                       duration: const Duration(milliseconds: 500),
-                      top: index == 0
-                          ? 36
-                          : index == 1
-                              ? 300
-                              : 100,
-                      right: index == 2 ? -30 : null,
-                      curve: Curves.ease,
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(32.0),
-                              child: AnimatedContainer(
-                                width: index == 0 ? 260 : 100,
-                                height: index == 0 ? 260 : 100,
-                                padding: const EdgeInsets.all(16),
-                                decoration: BoxDecoration(
+                      right: index == 1 ? 0 : -1000,
+                      top: 80,
+                      height: 500,
+                      child: Stack(
+                        children: [
+                          Image.asset(
+                            'assets/stack_card.png',
+                            height: 180,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          Positioned(
+                              top: 10,
+                              child: Image.asset(
+                                'assets/stack_card.png',
+                                height: 220,
+                                width: MediaQuery.of(context).size.width,
+                              )),
+                          Positioned(
+                              top: 20,
+                              child: Image.asset(
+                                'assets/stack_card.png',
+                                height: 260,
+                                width: MediaQuery.of(context).size.width,
+                              )),
+                          Positioned(
+                              top: 30,
+                              child: Image.asset(
+                                'assets/stack_card.png',
+                                height: 300,
+                                width: MediaQuery.of(context).size.width,
+                              ))
+                        ],
+                      )),
+                  AnimatedPositioned(
+                    duration: const Duration(milliseconds: 500),
+                    top: index == 0
+                        ? 36
+                        : index == 1
+                            ? 300
+                            : 200,
+                    right: index == 2 ? -30 : null,
+                    curve: Curves.ease,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Stack(
+                        children: [
+                          Stack(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(32.0),
+                                child: AnimatedContainer(
+                                  width: index == 0 ? 260 : 100,
+                                  height: index == 0 ? 260 : 100,
+                                  padding: const EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.transparent,
+                                    border: index == 0
+                                        ? Border.all(
+                                            color: const Color(0xFFFBC02D),
+                                            width: 1,
+                                          )
+                                        : null,
+                                  ),
+                                  duration: const Duration(milliseconds: 500),
+                                  child: ClipOval(
+                                    child: _isPermissionGranted &&
+                                            _isCameraInitialized
+                                        ? CameraPreview(_cameraController)
+                                        : _videoController.value.isInitialized
+                                            ? AspectRatio(
+                                                aspectRatio: _videoController
+                                                    .value.aspectRatio,
+                                                child: VideoPlayer(
+                                                    _videoController),
+                                              )
+                                            : const Center(
+                                                child:
+                                                    CircularProgressIndicator()),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          AnimatedPositioned(
+                            duration: const Duration(milliseconds: 500),
+                            top: 36,
+                            left: index != 0 ? -200 : 40,
+                            child: DashedContainer(
+                              dashColor: const Color(0xFFFBC02D),
+                              borderRadius: 50.0,
+                              dashedLength: 4,
+                              blankLength: 4,
+                              strokeWidth: 3.0,
+                              child: Container(
+                                width: 60,
+                                height: 60,
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
                                   shape: BoxShape.circle,
-                                  color: Colors.transparent,
-                                  border: index == 0
-                                      ? Border.all(
-                                          color: const Color(0xFFFBC02D),
-                                          width: 1,
-                                        )
-                                      : null,
                                 ),
-                                duration: const Duration(milliseconds: 500),
-                                child: ClipOval(
-                                  child: _isPermissionGranted &&
-                                          _isCameraInitialized
-                                      ? CameraPreview(_cameraController)
-                                      : _videoController.value.isInitialized
-                                          ? AspectRatio(
-                                              aspectRatio: _videoController
-                                                  .value.aspectRatio,
-                                              child:
-                                                  VideoPlayer(_videoController),
-                                            )
-                                          : const Center(
-                                              child:
-                                                  CircularProgressIndicator()),
-                                ),
-                              ),
-                            ),
-                            AnimatedPositioned(
-                              duration: const Duration(milliseconds: 500),
-                              top: 36,
-                              left: index != 0 ? -200 : 40,
-                              child: DashedContainer(
-                                dashColor: const Color(0xFFFBC02D),
-                                borderRadius: 50.0,
-                                dashedLength: 4,
-                                blankLength: 4,
-                                strokeWidth: 3.0,
-                                child: Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: ClipOval(
-                                      child: Image.asset(
-                                        'assets/blue_book.png',
-                                        fit: BoxFit.cover,
-                                      ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: ClipOval(
+                                    child: Image.asset(
+                                      'assets/blue_book.png',
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                            AnimatedPositioned(
-                              duration: const Duration(milliseconds: 500),
-                              top: 160,
-                              left: index != 0 ? -200 : 8,
-                              child: DashedContainer(
-                                dashColor: const Color(0xFFFBC02D),
-                                borderRadius: 50.0,
-                                dashedLength: 4,
-                                blankLength: 4,
-                                strokeWidth: 3.0,
-                                child: Container(
-                                  width: 45,
-                                  height: 45,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: ClipOval(
-                                      child: Image.asset(
-                                        'assets/pre_read_selected.png',
-                                        fit: BoxFit.cover,
-                                      ),
+                          ),
+                          AnimatedPositioned(
+                            duration: const Duration(milliseconds: 500),
+                            top: 160,
+                            left: index != 0 ? -200 : 8,
+                            child: DashedContainer(
+                              dashColor: const Color(0xFFFBC02D),
+                              borderRadius: 50.0,
+                              dashedLength: 4,
+                              blankLength: 4,
+                              strokeWidth: 3.0,
+                              child: Container(
+                                width: 45,
+                                height: 45,
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: ClipOval(
+                                    child: Image.asset(
+                                      'assets/pre_read_selected.png',
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                            AnimatedPositioned(
-                              duration: const Duration(milliseconds: 500),
-                              top: 50,
-                              right: index != 0 ? -200 : 0,
-                              child: DashedContainer(
-                                dashColor: const Color(0xFFFBC02D),
-                                borderRadius: 40.0,
-                                dashedLength: 4,
-                                blankLength: 4,
-                                strokeWidth: 3.0,
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 4, vertical: 8),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius:
-                                          BorderRadius.circular(40.0)),
-                                  child: const Text(
-                                    'Holistic well-Being',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontStyle: FontStyle.italic),
-                                  ),
+                          ),
+                          AnimatedPositioned(
+                            duration: const Duration(milliseconds: 500),
+                            top: 50,
+                            right: index != 0 ? -200 : 0,
+                            child: DashedContainer(
+                              dashColor: const Color(0xFFFBC02D),
+                              borderRadius: 40.0,
+                              dashedLength: 4,
+                              blankLength: 4,
+                              strokeWidth: 3.0,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 4, vertical: 8),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(40.0)),
+                                child: const Text(
+                                  'Holistic well-Being',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontStyle: FontStyle.italic),
                                 ),
                               ),
                             ),
-                            AnimatedPositioned(
-                              duration: const Duration(milliseconds: 500),
-                              bottom: 50,
-                              left: index == 0 ? 0 : -200,
-                              child: DashedContainer(
-                                dashColor: const Color(0xFFFBC02D),
-                                borderRadius: 40.0,
-                                dashedLength: 4,
-                                blankLength: 4,
-                                strokeWidth: 3.0,
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 4, vertical: 8),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius:
-                                          BorderRadius.circular(40.0)),
-                                  child: const Text(
-                                    'Doubt Clarification',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontStyle: FontStyle.italic),
-                                  ),
+                          ),
+                          AnimatedPositioned(
+                            duration: const Duration(milliseconds: 500),
+                            bottom: 50,
+                            left: index == 0 ? 0 : -200,
+                            child: DashedContainer(
+                              dashColor: const Color(0xFFFBC02D),
+                              borderRadius: 40.0,
+                              dashedLength: 4,
+                              blankLength: 4,
+                              strokeWidth: 3.0,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 4, vertical: 8),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(40.0)),
+                                child: const Text(
+                                  'Doubt Clarification',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontStyle: FontStyle.italic),
                                 ),
                               ),
                             ),
-                            AnimatedPositioned(
-                              duration: const Duration(milliseconds: 500),
-                              bottom: 80,
-                              right: index == 0 ? 0 : -200,
-                              child: DashedContainer(
-                                dashColor: const Color(0xFFFBC02D),
-                                borderRadius: 40.0,
-                                dashedLength: 4,
-                                blankLength: 4,
-                                strokeWidth: 3.0,
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 8),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius:
-                                          BorderRadius.circular(40.0)),
-                                  child: const Text(
-                                    '𝒫𝑒𝓇𝓈𝑜𝓃𝒶𝓁𝒾𝓈𝑒𝒹',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontStyle: FontStyle.italic),
-                                  ),
+                          ),
+                          AnimatedPositioned(
+                            duration: const Duration(milliseconds: 500),
+                            bottom: 80,
+                            right: index == 0 ? 0 : -200,
+                            child: DashedContainer(
+                              dashColor: const Color(0xFFFBC02D),
+                              borderRadius: 40.0,
+                              dashedLength: 4,
+                              blankLength: 4,
+                              strokeWidth: 3.0,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 8),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(40.0)),
+                                child: const Text(
+                                  '𝒫𝑒𝓇𝓈𝑜𝓃𝒶𝓁𝒾𝓈𝑒𝒹',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontStyle: FontStyle.italic),
                                 ),
                               ),
                             ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const Spacer(),
+              Row(
+                children: [
+                  if (index != 0)
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: InkWell(
+                        onTap: () {
+                          if (index > 0) {
+                            setState(() {
+                              index = index - 1;
+                            });
+                          }
+                        },
+                        child: CustomDashedCircle(
+                          size: 100,
+                          dashColors: [
+                            const Color(0xFFFBC02D), // First dash
+                            index == 1
+                                ? Colors.black12
+                                : const Color(0xFFFBC02D), // Second dash
+                            const Color(0xFFFBC02D), // Third dash
                           ],
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  Expanded(
+                    child: IgnorePointer(
+                      ignoring: index == 2,
+                      child: GestureDetector(
+                        onTap: () {
+                          if (index < 2) {
+                            print('hehehe$index');
 
-                const Spacer(),
-                Row(
-                  children: [
-                    if (index != 0)
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: InkWell(
-                          onTap: () {
-                            if (index > 0) {
-                              setState(() {
-                                index = index - 1;
-                              });
-                            }
-                          },
-                          child: CustomDashedCircle(
-                            size: 100,
-                            dashColors: [
-                              const Color(0xFFFBC02D), // First dash
-                              index == 1
-                                  ? Colors.black12
-                                  : const Color(0xFFFBC02D), // Second dash
-                              const Color(0xFFFBC02D), // Third dash
-                            ],
+                            setState(() {
+                              index = index + 1;
+                            });
+                            print('hehehe$index');
+                          }
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.all(8),
+                          height: 60, // Adjust height as needed
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFBC02D), // Background color
+                            borderRadius:
+                                BorderRadius.circular(8.0), // Rounded corners
                           ),
-                        ),
-                      ),
-                    Expanded(
-                      child: IgnorePointer(
-                        ignoring: index == 2,
-                        child: GestureDetector(
-                          onTap: () {
-                            if (index < 2) {
-                              print('hehehe$index');
-
-                              setState(() {
-                                index = index + 1;
-                              });
-                              print('hehehe$index');
-                            }
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.all(8),
-                            height: 60, // Adjust height as needed
-                            decoration: BoxDecoration(
-                              color:
-                                  const Color(0xFFFBC02D), // Background color
-                              borderRadius:
-                                  BorderRadius.circular(8.0), // Rounded corners
-                            ),
-                            alignment: Alignment.center, // Center the text
-                            child: Text(
-                              index == 2 ? 'Get Started' : 'Next',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
+                          alignment: Alignment.center, // Center the text
+                          child: Text(
+                            index == 2 ? 'Get Started' : 'Next',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
                             ),
                           ),
                         ),
                       ),
                     ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInOut,
+            left: index == 0
+                ? ((MediaQuery.of(context).size.width - 232.w) / 2)
+                : 0,
+            child: AnimatedContainer(
+              margin: const EdgeInsets.symmetric(vertical: 8),
+              alignment: Alignment.center,
+              duration: const Duration(milliseconds: 500),
+              width: index == 0 ? 200.w : 140.w,
+              height: index == 0 ? 60.h : 40.h,
+              child: Image.asset(
+                'assets/sparkl_logo.png',
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+            left: index == 0
+                ? (MediaQuery.of(context).size.width - 400) / 2 // Center
+                : index == 1 || index == 2
+                    ? -200 // Move Left
+                    : MediaQuery.of(context).size.width, // Start Right
+            top: 80.0,
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 200),
+              opacity: index == 0 ? 1 : 0,
+              child: const SizedBox(
+                width: 400,
+                child: Column(
+                  children: [
+                    Text(
+                      'Learning Made\n Personal',
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      'A Program designed just for YOU!',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                      ),
+                    ),
                   ],
                 ),
-              ],
+              ),
+            ),
+          ),
+
+          // Second Text
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+
+            left: index == 1
+                ? 16 // Center
+                : index == 2
+                    ? -200 // Move Left
+                    : MediaQuery.of(context).size.width, // Start Right
+            top: 60.0,
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 200),
+              opacity: index == 1 ? 1 : 0,
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '1-on-1 Live Classes',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    ' Learning customized for every student',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // Third Text
+
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+            left: index == 2
+                ? 16 // Center
+                : MediaQuery.of(context).size.width + 200, // Move Left
+            top: 60.0,
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 200),
+              opacity: index == 2 ? 1 : 0,
+              child: const Text(
+                'Doubt Resolution\nWith Teachers',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.left,
+              ),
             ),
           ),
           AnimatedPositioned(
@@ -802,11 +562,12 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
             duration: const Duration(milliseconds: 500),
             curve: Curves.easeInOut,
             top: index == 1
-                ? 200
+                ? 150
                 : index == 2
                     ? 240
                     : -200,
-            left: index == 1 ? 80 : 0,
+            left:
+                index == 1 ? (MediaQuery.of(context).size.width - 232) / 2 : 0,
             child: AnimatedContainer(
               margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               duration: const Duration(milliseconds: 500),
@@ -815,7 +576,7 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
                   : index == 2
                       ? 60
                       : 200,
-              height: index == 1 ? 80 : 60,
+              height: index == 1 ? 80 : 80,
               alignment: Alignment.center,
               decoration: index == 2
                   ? const BoxDecoration(
@@ -829,11 +590,15 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
                               _teacherVideoController.value.aspectRatio,
                           child: VideoPlayer(_teacherVideoController),
                         )
-                      : ClipOval(
-                          child: AspectRatio(
-                            aspectRatio: 1,
-                            child: VideoPlayer(_teacherVideoController),
-                          ),
+                      : Stack(
+                          children: [
+                            ClipOval(
+                              child: AspectRatio(
+                                aspectRatio: 1,
+                                child: VideoPlayer(_teacherVideoController),
+                              ),
+                            )
+                          ],
                         )
                   : const Center(child: CircularProgressIndicator()),
             ),
