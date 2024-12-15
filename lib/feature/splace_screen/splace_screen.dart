@@ -24,6 +24,7 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
   late CameraController _cameraController;
   bool _isCameraInitialized = false;
   bool _isPermissionGranted = false;
+
   int index = 0;
 
   @override
@@ -111,63 +112,67 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
   }
 
   /// navigation button
-  Widget getStart() => Row(
-        children: [
-          if (index != 0)
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: InkWell(
-                onTap: () {
-                  if (index > 0) {
-                    setState(() {
-                      index = index - 1;
-                    });
-                  }
-                },
-                child: CustomDashedCircle(
-                  size: 100,
-                  dashColors: [
-                    const Color(0xFFFBC02D), // First dash
-                    index == 1
-                        ? Colors.black12
-                        : const Color(0xFFFBC02D), // Second dash
-                    const Color(0xFFFBC02D), // Third dash
-                  ],
+  Widget getStart() => Padding(
+        padding: const EdgeInsets.only(bottom: 16),
+        child: Row(
+          children: [
+            if (index != 0)
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: InkWell(
+                  onTap: () {
+                    if (index > 0) {
+                      setState(() {
+                        index = index - 1;
+                      });
+                    }
+                  },
+                  child: CustomDashedCircle(
+                    size: 100,
+                    dashColors: [
+                      const Color(0xFFFBC02D), // First dash
+                      index == 1
+                          ? Colors.black12
+                          : const Color(0xFFFBC02D), // Second dash
+                      const Color(0xFFFBC02D), // Third dash
+                    ],
+                  ),
                 ),
               ),
-            ),
-          Expanded(
-            child: IgnorePointer(
-              ignoring: index == 2,
-              child: GestureDetector(
-                onTap: () {
-                  if (index < 2) {
-                    setState(() {
-                      index = index + 1;
-                    });
-                  }
-                },
-                child: Container(
-                  margin: const EdgeInsets.all(8),
-                  height: 60, // Adjust height as needed
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFFBC02D), // Background color
-                    borderRadius: BorderRadius.circular(8.0), // Rounded corners
-                  ),
-                  alignment: Alignment.center, // Center the text
-                  child: Text(
-                    index == 2 ? 'Get Started' : 'Next',
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+            Expanded(
+              child: IgnorePointer(
+                ignoring: index == 2,
+                child: GestureDetector(
+                  onTap: () {
+                    if (index < 2) {
+                      setState(() {
+                        index = index + 1;
+                      });
+                    }
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.all(8),
+                    height: 60, // Adjust height as needed
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFBC02D), // Background color
+                      borderRadius:
+                          BorderRadius.circular(8.0), // Rounded corners
+                    ),
+                    alignment: Alignment.center, // Center the text
+                    child: Text(
+                      index == 2 ? 'Get Started' : 'Next',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
 
   /// logo
@@ -292,11 +297,12 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
     return AnimatedPositioned(
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
-      top: index == 1
-          ? 150
-          : index == 2
-              ? 180
-              : -200,
+      top: (index == 1
+              ? 120
+              : index == 2
+                  ? 150
+                  : -200)
+          .h,
       left: index == 1 ? (MediaQuery.of(context).size.width - 232) / 2 : 0,
       child: AnimatedContainer(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -321,7 +327,7 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
             ? index == 1
                 ? AspectRatio(
                     aspectRatio: _teacherVideoController.value.aspectRatio,
-                    child: VideoPlayer(_teacherVideoController),
+                    child: Card(child: VideoPlayer(_teacherVideoController)),
                   )
                 : Stack(
                     children: [
@@ -346,7 +352,7 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
                         ),
                       ),
                       Positioned(
-                          top: 0,
+                          top: 8,
                           left: 0,
                           child: CircleAvatar(
                             radius: 30,
@@ -657,7 +663,7 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(40.0)),
                         child: const Text(
-                          '𝒫𝑒𝓇𝓈𝑜𝓃𝒶𝓁𝒾𝓈𝑒𝒹',
+                          'Personalized',
                           style: TextStyle(
                               fontSize: 16, fontStyle: FontStyle.italic),
                         ),
@@ -676,13 +682,13 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
   /// teacher second chat
   Widget teacherSecondChatWidget() {
     return AnimatedPositioned(
-      duration: const Duration(seconds: 1),
+      duration: const Duration(milliseconds: 600),
       curve: Curves.easeInOut,
-      bottom: -80,
-      left: index == 2 ? 0 : -100, // Fixed right value for animation
+      bottom: -70.h, // Responsive bottom position
+      left: index == 2 ? 0 : -100, // Responsive left position
       child: AnimatedContainer(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        duration: const Duration(seconds: 1),
+        duration: const Duration(milliseconds: 600),
         width: index == 2 ? MediaQuery.of(context).size.width * 0.75 : 0,
         height: index == 1 ? 80 : 400,
         alignment: Alignment.center,
@@ -696,7 +702,7 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
             ChatBubble(
               clipper: ChatBubbleClipper(type: BubbleType.receiverBubble),
               alignment: Alignment.topRight,
-              margin: const EdgeInsets.only(top: 43, left: 12),
+              margin: const EdgeInsets.only(top: 36, left: 12),
               backGroundColor: const Color(0xFFFBC02D),
               child: Container(
                 constraints: BoxConstraints(
@@ -712,18 +718,20 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
               ),
             ),
             Positioned(
-                top: 0,
-                left: 0,
-                child: CircleAvatar(
-                  radius: 30,
-                  child: ClipOval(
-                      child: _teacherVideoController.value.isInitialized
-                          ? AspectRatio(
-                              aspectRatio: 1,
-                              child: VideoPlayer(_teacherVideoController),
-                            )
-                          : const Center(child: CircularProgressIndicator())),
-                ))
+              top: 0,
+              left: 0,
+              child: CircleAvatar(
+                radius: 30,
+                child: ClipOval(
+                  child: _teacherVideoController.value.isInitialized
+                      ? AspectRatio(
+                          aspectRatio: 1,
+                          child: VideoPlayer(_teacherVideoController),
+                        )
+                      : const Center(child: CircularProgressIndicator()),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -735,36 +743,35 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
   Widget emoji() => AnimatedPositioned(
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
-        bottom: 180,
-        right: index == 0
-            ? MediaQuery.of(context).size.width / 4
-            : 0, // Fixed right value for animation
+        bottom: 180.h, // Responsive bottom position
+        right: index == 0 ? MediaQuery.of(context).size.width / 4 : 0,
         child: AnimatedContainer(
-          height: index == 0 ? 45 : 0,
+          height: index == 0 ? 45 : 0, // Responsive height
+          width: 45, // Responsive width
           duration: const Duration(milliseconds: 500),
           child: AnimatedOpacity(
             opacity: index == 0 ? 1.0 : 0.0, // Visibility control
             duration: const Duration(milliseconds: 500),
             child: DashedContainer(
               dashColor: const Color(0xFFFBC02D),
-              borderRadius: 45.0,
-              dashedLength: 4,
-              blankLength: 4,
-              strokeWidth: 3.0,
+              borderRadius: 45, // Responsive border radius
+              dashedLength: 4, // Responsive dash length
+              blankLength: 4, // Responsive blank length
+              strokeWidth: 3, // Responsive stroke width
               child: Container(
-                width: 45,
-                height: 45,
+                width: 45, // Responsive container width
+                height: 45, // Responsive container height
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: EdgeInsets.all(12), // Responsive padding
                   child: ClipOval(
                     child: Image.asset(
                       'assets/emoji.png',
-                      height: 16,
-                      width: 16,
+                      height: 16, // Responsive image height
+                      width: 16, // Responsive image width
                       fit: BoxFit.cover,
                     ),
                   ),
