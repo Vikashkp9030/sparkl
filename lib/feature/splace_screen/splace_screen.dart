@@ -31,6 +31,10 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
   void initState() {
     super.initState();
     _checkPermissionsAndInitializeCamera();
+    _initializeVideoController();
+  }
+
+  void _initializeVideoController() {
     _videoController = VideoPlayerController.asset('assets/studentvideo.mp4')
       ..initialize().then((_) {
         setState(() {});
@@ -93,11 +97,7 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
         backgroundColor: const Color(0xFFFFFDEF),
         body: Stack(
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [studentContent(), const Spacer(), getStart()],
-            ),
+            mainContent(),
             logo(),
             pageOneTitle(),
             pageTwoTitle(),
@@ -110,6 +110,12 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
       ),
     );
   }
+
+  Widget mainContent() => Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [studentContent(), const Spacer(), getStart()],
+      );
 
   /// navigation button
   Widget getStart() => Padding(
@@ -743,7 +749,7 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
   Widget emoji() => AnimatedPositioned(
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
-        bottom: 180.h, // Responsive bottom position
+        bottom: 140.h, // Responsive bottom position
         right: index == 0 ? MediaQuery.of(context).size.width / 4 : 0,
         child: AnimatedContainer(
           height: index == 0 ? 45 : 0, // Responsive height
