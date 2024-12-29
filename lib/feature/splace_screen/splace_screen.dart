@@ -20,7 +20,6 @@ class SparklUIScreen extends StatefulWidget {
 class _SparklUIScreenState extends State<SparklUIScreen> {
   late VideoPlayerController _videoController;
   late VideoPlayerController _teacherVideoController;
-
   late CameraController _cameraController;
   bool _isCameraInitialized = false;
   bool _isPermissionGranted = false;
@@ -772,7 +771,7 @@ class _SparklUIScreenState extends State<SparklUIScreen> {
                   shape: BoxShape.circle,
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(12), // Responsive padding
+                  padding: const EdgeInsets.all(12), // Responsive padding
                   child: ClipOval(
                     child: Image.asset(
                       'assets/emoji.png',
